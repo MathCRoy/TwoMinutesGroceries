@@ -257,343 +257,343 @@
       "desc": "Céréales",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 2,
       "desc": "Chipits",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 3,
       "desc": "Amandes",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 4,
       "desc": "Chocolat",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 5,
       "desc": "Lentilles",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 6,
       "desc": "Barres tendres",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 7,
       "desc": "Pâtes",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 8,
       "desc": "Vinaigre Balsamique",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 9,
       "desc": "Salsa",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 10,
       "desc": "Tomates en Canne",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 11,
       "desc": "Thon en Canne",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 12,
       "desc": "Farine Blanche",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 13,
       "desc": "Farine de Blé Entier",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 14,
       "desc": "Gruau",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 15,
       "desc": "Sucre",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 16,
       "desc": "Cassonnade",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 17,
       "desc": "Riz",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 18,
       "desc": "Huile d'Olive",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 19,
       "desc": "Huile Végétale",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 20,
       "desc": "Fruit Général",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 21,
       "desc": "Fruits Congelés",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Frozen"
     },
     {
       "id": 22,
       "desc": "Petits Fruits",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 23,
       "desc": "Légumes Congelés",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Frozen"
     },
     {
       "id": 24,
       "desc": "Beurre",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Dairy"
     },
     {
       "id": 25,
       "desc": "Lait",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Dairy"
     },
     {
       "id": 26,
       "desc": "Mozzarella",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Dairy"
     },
     {
       "id": 27,
       "desc": "Yogourt",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Dairy"
     },
     {
       "id": 28,
       "desc": "Crème",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Dairy"
     },
     {
       "id": 29,
       "desc": "Œufs",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Dairy"
     },
     {
       "id": 30,
       "desc": "Tofu",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 31,
       "desc": "Bouillon de poulet",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 32,
       "desc": "Jus",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 33,
       "desc": "Mayo",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 34,
       "desc": "Piments forts",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 35,
       "desc": "Poulet",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Meat"
     },
     {
       "id": 36,
       "desc": "Oignon",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 37,
       "desc": "Carottes",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 38,
       "desc": "Sauce Soya",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 39,
       "desc": "Vinaigre de Riz",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 40,
       "desc": "Porc",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Meat"
     },
     {
       "id": 41,
       "desc": "Moutarde",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 42,
       "desc": "Laitue",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 43,
       "desc": "Compote de pomme",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 44,
       "desc": "Fond de tarte",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Frozen"
     },
     {
       "id": 45,
       "desc": "Lait de Coco",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 46,
       "desc": "Lime",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 47,
       "desc": "Ail",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 48,
       "desc": "Vinaigre",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 49,
       "desc": "Haricot rouge",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 50,
@@ -607,630 +607,630 @@
       "desc": "Huile de sésame",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 52,
       "desc": "Sauce poisson",
       "measure_unit": "",
       "is_basic": true,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 53,
       "desc": "Artichauts",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 54,
       "desc": "Asperges",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 55,
       "desc": "Aubergine",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 56,
       "desc": "Avocats",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 57,
       "desc": "Bagels",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 58,
       "desc": "Basilic",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 59,
       "desc": "Betterave",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 61,
       "desc": "Bocconcini",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Dairy"
     },
     {
       "id": 62,
       "desc": "Bouillon Pho",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 63,
       "desc": "Brie",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Dairy"
     },
     {
       "id": 64,
       "desc": "Brocoli",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 65,
       "desc": "Burrata",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Dairy"
     },
     {
       "id": 66,
       "desc": "Canneberges",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 67,
       "desc": "Cari",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 68,
       "desc": "Champignons",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 69,
       "desc": "Cheddar",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Dairy"
     },
     {
       "id": 70,
       "desc": "Citron",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 71,
       "desc": "Citronnelle",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 72,
       "desc": "Concombre",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 73,
       "desc": "Condiments pizza",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 74,
       "desc": "Coquilles",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 75,
       "desc": "Coriandre",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 76,
       "desc": "Courge",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 77,
       "desc": "Courge spagh",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 78,
       "desc": "Crevettes",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Meat"
     },
     {
       "id": 79,
       "desc": "Crème 15%",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Dairy"
     },
     {
       "id": 80,
       "desc": "Crème de tomate",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 81,
       "desc": "Crème sure",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Dairy"
     },
     {
       "id": 82,
       "desc": "Câpres",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 83,
       "desc": "Céleri",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 84,
       "desc": "Feta",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Dairy"
     },
     {
       "id": 85,
       "desc": "Fromage Philadelphia",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Dairy"
     },
     {
       "id": 86,
       "desc": "Fromage de chèvre",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Dairy"
     },
     {
       "id": 87,
       "desc": "Fromage suisse",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Dairy"
     },
     {
       "id": 88,
       "desc": "Fève germée",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 89,
       "desc": "Gingembre",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 90,
       "desc": "Gnocchi",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 91,
       "desc": "Goberge",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Meat"
     },
     {
       "id": 92,
       "desc": "Graines de citrouilles",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 93,
       "desc": "Herbes de Provence",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 94,
       "desc": "Ketchup",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 95,
       "desc": "Levure",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 96,
       "desc": "Légumes",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 97,
       "desc": "Maïs",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 98,
       "desc": "Miel",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 99,
       "desc": "Nachos",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 100,
       "desc": "Nouilles de Riz",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 101,
       "desc": "Oignon Rouge",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 102,
       "desc": "Olives",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 103,
       "desc": "Pain",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 104,
       "desc": "Pain Naan",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 105,
       "desc": "Paprika",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 106,
       "desc": "Parmesan",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Dairy"
     },
     {
       "id": 107,
       "desc": "Patates",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 108,
       "desc": "Patates douces",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 109,
       "desc": "Pepperoni",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Meat"
     },
     {
       "id": 110,
       "desc": "Poireau",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 111,
       "desc": "Poivron",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 112,
       "desc": "Pomme",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 113,
       "desc": "Poulet haché",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Meat"
     },
     {
       "id": 114,
       "desc": "Pâte de Tomates",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 115,
       "desc": "Pâtes Lasagne",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 116,
       "desc": "Pêches",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 117,
       "desc": "Raviolis",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Frozen"
     },
     {
       "id": 118,
       "desc": "Ricotta",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Dairy"
     },
     {
       "id": 119,
       "desc": "Riz Arborio",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 120,
       "desc": "Roquette",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 121,
       "desc": "Sauce Pad-Thaï",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 122,
       "desc": "Sauce Worcestershire",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 123,
       "desc": "Sauce tomate",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 124,
       "desc": "Saumon congelé",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Frozen"
     },
     {
       "id": 125,
       "desc": "Saumon frais",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Meat"
     },
     {
       "id": 126,
       "desc": "Saumon fumé",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Meat"
     },
     {
       "id": 127,
       "desc": "Soupe à l'oignon",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 128,
       "desc": "Spaghetti",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 129,
       "desc": "Sriracha",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 130,
       "desc": "Tomates cerises",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 132,
       "desc": "Tomates fraîches",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 133,
       "desc": "Tortilla",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 134,
       "desc": "Vermicelles",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 135,
       "desc": "Vin blanc",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 136,
       "desc": "Vinaigrette italienne",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 138,
       "desc": "Yogourt Grec",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Dairy"
     },
     {
       "id": 139,
       "desc": "Zucchini",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 140,
       "desc": "Échalotte française",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 141,
       "desc": "Épices Chili",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Pantry"
     },
     {
       "id": 142,
       "desc": "Épinards",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Vegie"
     },
     {
       "id": 143,
       "desc": "Blé d'inde",
       "measure_unit": "",
       "is_basic": false,
-      "section": ""
+      "section": "Vegie"
     }
   ],
   "recipe_ingredient_mapper": [
@@ -2772,7 +2772,7 @@
     {
       "id": 308,
       "recipe_id": 34,
-      "ingredient_id": 133 
+      "ingredient_id": 133
     },
     {
       "id": 309,

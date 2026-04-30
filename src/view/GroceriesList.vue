@@ -152,8 +152,8 @@ function allChecked(items: { id: number }[]): boolean {
           @click="toggleIngredient(ingredient.id)"
         >
           <span class="flex-grow-1">{{ ingredient.desc }}</span>
-          <span v-if="ingredient.totalQty || ingredient.measure_unit" class="text-body-2 text-grey">
-            {{ [ingredient.totalQty, ingredient.measure_unit].filter(Boolean).join(' ') }}
+          <span v-if="(ingredient.totalQty && ingredient.totalQty !== '1') || ingredient.measure_unit" class="text-body-2 text-grey">
+            {{ [ingredient.totalQty !== '1' ? ingredient.totalQty : '', ingredient.measure_unit].filter(Boolean).join(' ') }}
           </span>
         </v-card>
       </template>
@@ -179,8 +179,8 @@ function allChecked(items: { id: number }[]): boolean {
               @click="toggleIngredient(ingredient.id)"
             >
               <span class="flex-grow-1">{{ ingredient.desc }}</span>
-              <span v-if="ingredient.totalQty || ingredient.measure_unit" class="text-body-2 text-grey">
-                {{ [ingredient.totalQty, ingredient.measure_unit].filter(Boolean).join(' ') }}
+              <span v-if="(ingredient.totalQty && ingredient.totalQty !== '1') || ingredient.measure_unit" class="text-body-2 text-grey">
+                {{ [ingredient.totalQty !== '1' ? ingredient.totalQty : '', ingredient.measure_unit].filter(Boolean).join(' ') }}
               </span>
             </v-card>
           </v-expansion-panel-text>
