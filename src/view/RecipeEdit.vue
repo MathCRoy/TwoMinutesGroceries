@@ -96,7 +96,7 @@ async function removeIngredient(mappingId: number) {
 </script>
 
 <template>
-  <v-container max-width="600">
+  <div>
     <div class="d-flex align-center mb-4">
       <v-btn icon="mdi-arrow-left" variant="text" @click="router.back()" />
       <span class="text-h6 ml-2">Edit Recipe</span>
@@ -131,7 +131,7 @@ async function removeIngredient(mappingId: number) {
     <v-card
       v-for="ingredient in recipeIngredients"
       :key="ingredient.mappingId"
-      class="mb-2 pa-3 d-flex align-center ga-2"
+      class="mb-2 pa-3 d-flex align-center"
     >
       <div class="flex-grow-1">
         <span>{{ ingredient.desc }}</span>
@@ -183,5 +183,5 @@ async function removeIngredient(mappingId: number) {
         @click="addIngredient"
       />
     </div>
-  </v-container>
+  </div>
 </template>

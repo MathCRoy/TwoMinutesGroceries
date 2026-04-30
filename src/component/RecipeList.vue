@@ -2,8 +2,11 @@
 import { ref, nextTick, onUnmounted, computed } from 'vue'
 import { liveQuery } from 'dexie'
 import draggable from 'vuedraggable'
+import { useRouter } from 'vue-router'
 import { db } from '../db'
 import RecipeCard from './RecipeCard.vue'
+
+const router = useRouter()
 
 const recipes = ref([])
 const search = ref('')
@@ -52,6 +55,11 @@ async function onDragEnd() {
 
 <template>
   <div>
+    <div class="d-flex align-center mb-4">
+      <v-btn icon="mdi-arrow-left" variant="text" @click="router.back()" />
+      <span class="text-h6 ml-2">Recipes</span>
+    </div>
+
     <v-text-field
       v-model="search"
       placeholder="Search"

@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import { ref, nextTick, onUnmounted, computed } from 'vue'
 import { liveQuery } from 'dexie'
+import { useRouter } from 'vue-router'
 import { db } from '../db'
 import IngredientCard from './IngredientCard.vue'
+
+const router = useRouter()
 
 const ingredients = ref([])
 const search = ref('')
@@ -57,6 +60,11 @@ function onFocusOut() {
 
 <template>
   <div>
+    <div class="d-flex align-center mb-4">
+      <v-btn icon="mdi-arrow-left" variant="text" @click="router.back()" />
+      <span class="text-h6 ml-2">Ingredients</span>
+    </div>
+
     <v-text-field
       v-model="search"
       placeholder="Search"
