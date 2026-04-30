@@ -86,6 +86,19 @@ const openPanels = ref<number[]>([])
 watch(sortByType, (on) => {
   if (on) openPanels.value = ingredientsBySection.value.map((_, i) => i)
 })
+
+const checkedIds = ref<Set<number>>(new Set())
+
+function toggleIngredient(id: number) {
+  const next = new Set(checkedIds.value)
+  if (next.has(id)) next.delete(id)
+  else next.add(id)
+  checkedIds.value = next
+}
+
+function allChecked(items: { id: number }[]): boolean {
+  return items.length > 0 && items.every(i => checkedIds.value.has(i.id))
+}
 </script>
 
 <template>
@@ -131,7 +144,9 @@ watch(sortByType, (on) => {
         <v-card
           v-for="ingredient in selectedIngredients"
           :key="ingredient.id"
-          class="mb-2 pa-3 d-flex align-center"
+          class="mb-2 pa-3 d-flex align-center ingredient-card"
+          :class="{ 'ingredient-checked': checkedIds.has(ingredient.id) }"
+          @click="toggleIngredient(ingredient.id)"
         >
           <span class="flex-grow-1">{{ ingredient.desc }}</span>
           <span v-if="ingredient.totalQty || ingredient.measure_unit" class="text-body-2 text-grey">
@@ -148,7 +163,7 @@ watch(sortByType, (on) => {
           bg-color="transparent"
           class="mb-3"
         >
-          <v-expansion-panel-title>
+          <v-expansion-panel-title :class="{ 'section-checked': allChecked(group.items) }">
             <span class="font-weight-medium">{{ group.label }}</span>
             <span class="text-caption text-grey ml-2">({{ group.items.length }})</span>
           </v-expansion-panel-title>
@@ -156,7 +171,9 @@ watch(sortByType, (on) => {
             <v-card
               v-for="ingredient in group.items"
               :key="ingredient.id"
-              class="mb-2 pa-3 d-flex align-center"
+              class="mb-2 pa-3 d-flex align-center ingredient-card"
+              :class="{ 'ingredient-checked': checkedIds.has(ingredient.id) }"
+              @click="toggleIngredient(ingredient.id)"
             >
               <span class="flex-grow-1">{{ ingredient.desc }}</span>
               <span v-if="ingredient.totalQty || ingredient.measure_unit" class="text-body-2 text-grey">
@@ -171,6 +188,18 @@ watch(sortByType, (on) => {
 </template>
 
 <style scoped>
+.ingredient-card {
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.ingredient-checked {
+  opacity: 0.2;
+}
+:deep(.v-expansion-panel-title.section-checked) {
+  opacity: 0.2;
+  transition: opacity 0.2s;
+}
+
 :deep(.v-expansion-panel::after),
 :deep(.v-expansion-panel--active + .v-expansion-panel::before),
 :deep(.v-expansion-panel::before) {
