@@ -16,10 +16,13 @@ const filtered = computed(() =>
     (!basicOnly.value || i.is_basic)
   )
 )
+const SECTIONS = ['Vegie', 'Meat', 'Frozen', 'Dairy', 'Dry']
+
 const adding = ref(false)
 const newDesc = ref('')
 const newUnit = ref('')
 const newIsBasic = ref(false)
+const newSection = ref('')
 const inputRef = ref(null)
 
 const subscription = liveQuery(
@@ -35,6 +38,7 @@ async function startAdding() {
   newDesc.value = ''
   newUnit.value = ''
   newIsBasic.value = false
+  newSection.value = ''
   await nextTick()
   inputRef.value?.focus()
 }
@@ -44,7 +48,8 @@ async function confirmAdd() {
     await db.ingredients.add({
       desc: newDesc.value.trim(),
       measure_unit: newUnit.value ?? '',
-      is_basic: newIsBasic.value
+      is_basic: newIsBasic.value,
+      section: newSection.value ?? ''
     })
   }
   adding.value = false
@@ -58,7 +63,9 @@ const formRef = ref(null)
 
 function onFocusOut() {
   setTimeout(() => {
-    if (!formRef.value?.contains(document.activeElement)) {
+    const overlay = document.querySelector('.v-overlay-container')
+    if (!formRef.value?.contains(document.activeElement) &&
+        !overlay?.contains(document.activeElement)) {
       cancelAdd()
     }
   }, 150)
@@ -89,28 +96,18 @@ function onFocusOut() {
     </div>
 
     <v-card v-if="adding" ref="formRef" class="mb-2 pa-2" @focusout="onFocusOut">
-      <v-text-field
-        ref="inputRef"
-        v-model="newDesc"
-        placeholder="Ingredient name"
-        variant="underlined"
-        density="compact"
-        autofocus
-        hide-details
-        class="mb-1"
-        @keyup.enter="confirmAdd"
-        @keyup.esc="cancelAdd"
-      />
-      <div class="d-flex align-center ga-2">
-        <v-select
-          v-model="newUnit"
-          :items="['cup', 'ml', 'g']"
-          placeholder="Unit (optional)"
+      <div class="d-flex align-center ga-2 mb-1">
+        <v-text-field
+          ref="inputRef"
+          v-model="newDesc"
+          placeholder="Ingredient name"
           variant="underlined"
           density="compact"
+          autofocus
           hide-details
-          clearable
           class="flex-grow-1"
+          @keyup.enter="confirmAdd"
+          @keyup.esc="cancelAdd"
         />
         <v-checkbox
           v-model="newIsBasic"
@@ -119,6 +116,26 @@ function onFocusOut() {
           hide-details
         />
         <v-btn icon="mdi-check" variant="text" size="small" color="primary" @click="confirmAdd" />
+      </div>
+      <div class="d-flex align-center ga-2">
+        <v-select
+          v-model="newUnit"
+          :items="['', 'cup', 'ml', 'g']"
+          placeholder="Unit"
+          variant="underlined"
+          density="compact"
+          hide-details
+          class="flex-grow-1"
+        />
+        <v-select
+          v-model="newSection"
+          :items="['', ...SECTIONS]"
+          placeholder="Section"
+          variant="underlined"
+          density="compact"
+          hide-details
+          class="flex-grow-1"
+        />
       </div>
     </v-card>
 
