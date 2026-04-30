@@ -2,16 +2,18 @@
 import { ref, nextTick } from 'vue'
 import { db } from '../db'
 
-const props = defineProps<{ ingredient: { id: number, desc: string, measure_unit: string } }>()
+const props = defineProps<{ ingredient: { id: number, desc: string, measure_unit: string, is_basic: boolean } }>()
 
 const editing = ref(false)
 const editDesc = ref('')
 const editUnit = ref('')
+const editIsBasic = ref(false)
 const inputRef = ref(null)
 
 async function startEdit() {
   editDesc.value = props.ingredient.desc
   editUnit.value = props.ingredient.measure_unit
+  editIsBasic.value = props.ingredient.is_basic ?? false
   editing.value = true
   await nextTick()
   inputRef.value?.focus()
@@ -21,7 +23,8 @@ async function confirmEdit() {
   if (editDesc.value.trim()) {
     await db.ingredients.update(props.ingredient.id, {
       desc: editDesc.value.trim(),
-      measure_unit: editUnit.value ?? ''
+      measure_unit: editUnit.value ?? '',
+      is_basic: editIsBasic.value
     })
   }
   editing.value = false
@@ -68,12 +71,19 @@ function onFocusOut() {
             clearable
             class="flex-grow-1"
           />
+          <v-checkbox
+            v-model="editIsBasic"
+            label="Basic"
+            density="compact"
+            hide-details
+          />
           <v-btn icon="mdi-check" variant="text" size="small" color="primary" @click="confirmEdit" />
         </div>
       </div>
       <template v-else>
         <span>{{ ingredient.desc }}</span>
         <span v-if="ingredient.measure_unit" class="text-caption text-grey ml-2">({{ ingredient.measure_unit }})</span>
+        <v-chip v-if="ingredient.is_basic" size="x-small" color="primary" variant="tonal" class="ml-2">Basic</v-chip>
       </template>
     </div>
 

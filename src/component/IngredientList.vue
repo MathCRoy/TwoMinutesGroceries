@@ -9,12 +9,17 @@ const router = useRouter()
 
 const ingredients = ref([])
 const search = ref('')
+const basicOnly = ref(false)
 const filtered = computed(() =>
-  ingredients.value.filter(i => i.desc.toLowerCase().includes(search.value.toLowerCase()))
+  ingredients.value.filter(i =>
+    i.desc.toLowerCase().includes(search.value.toLowerCase()) &&
+    (!basicOnly.value || i.is_basic)
+  )
 )
 const adding = ref(false)
 const newDesc = ref('')
 const newUnit = ref('')
+const newIsBasic = ref(false)
 const inputRef = ref(null)
 
 const subscription = liveQuery(
@@ -29,6 +34,7 @@ async function startAdding() {
   adding.value = true
   newDesc.value = ''
   newUnit.value = ''
+  newIsBasic.value = false
   await nextTick()
   inputRef.value?.focus()
 }
@@ -37,7 +43,8 @@ async function confirmAdd() {
   if (newDesc.value.trim()) {
     await db.ingredients.add({
       desc: newDesc.value.trim(),
-      measure_unit: newUnit.value ?? ''
+      measure_unit: newUnit.value ?? '',
+      is_basic: newIsBasic.value
     })
   }
   adding.value = false
@@ -76,7 +83,10 @@ function onFocusOut() {
       class="mb-3"
     />
 
-    <v-btn icon="mdi-plus" variant="text" @click="startAdding" />
+    <div class="d-flex align-center">
+      <v-checkbox v-model="basicOnly" label="Basic only" density="compact" hide-details class="mr-2" />
+      <v-btn icon="mdi-plus" variant="text" @click="startAdding" />
+    </div>
 
     <v-card v-if="adding" ref="formRef" class="mb-2 pa-2" @focusout="onFocusOut">
       <v-text-field
@@ -101,6 +111,12 @@ function onFocusOut() {
           hide-details
           clearable
           class="flex-grow-1"
+        />
+        <v-checkbox
+          v-model="newIsBasic"
+          label="Basic"
+          density="compact"
+          hide-details
         />
         <v-btn icon="mdi-check" variant="text" size="small" color="primary" @click="confirmAdd" />
       </div>

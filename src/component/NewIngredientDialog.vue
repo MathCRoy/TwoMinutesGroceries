@@ -8,11 +8,12 @@ const emit = defineEmits<{ created: [id: number] }>()
 
 const name = ref('')
 const unit = ref('')
+const isBasic = ref(false)
 
 async function confirm() {
   const trimmed = name.value.trim()
   if (!trimmed) return
-  const id = await db.ingredients.add({ desc: trimmed, measure_unit: unit.value ?? '' })
+  const id = await db.ingredients.add({ desc: trimmed, measure_unit: unit.value ?? '', is_basic: isBasic.value })
   emit('created', id as number)
   close()
 }
@@ -21,6 +22,7 @@ function close() {
   open.value = false
   name.value = ''
   unit.value = ''
+  isBasic.value = false
 }
 </script>
 
@@ -48,6 +50,13 @@ function close() {
           density="compact"
           hide-details
           clearable
+          class="mb-2"
+        />
+        <v-checkbox
+          v-model="isBasic"
+          label="Basic"
+          density="compact"
+          hide-details
         />
       </v-card-text>
       <v-card-actions class="px-4 pb-3">
