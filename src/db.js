@@ -3,7 +3,9 @@ import Dexie from 'dexie'
 export const db = new Dexie('TwoMinutesGroceries')
 
 db.version(1).stores({
-    recipes: '++id, desc, position'
+    recipes: '++id, desc, position',
+    ingredients: '++id, desc, measure_unit',
+    recipe_ingredient_mapper: '++id, recipe_id, ingredient_id'
 })   
 
 export async function seedIfEmpty() {

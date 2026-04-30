@@ -1,23 +1,23 @@
 <script setup lang="ts">
 import { ref, nextTick, onUnmounted, computed } from 'vue'
 import { liveQuery } from 'dexie'
-import draggable from 'vuedraggable'
 import { db } from '../db'
-import RecipeCard from './RecipeCard.vue'
+import IngredientCard from './IngredientCard.vue'
 
-const recipes = ref([])
+const ingredients = ref([])
 const search = ref('')
 const filtered = computed(() =>
-  recipes.value.filter(r => r.desc.toLowerCase().includes(search.value.toLowerCase()))
+  ingredients.value.filter(i => i.desc.toLowerCase().includes(search.value.toLowerCase()))
 )
 const adding = ref(false)
 const newDesc = ref('')
+const newUnit = ref('')
 const inputRef = ref(null)
 
 const subscription = liveQuery(
-  () => db.recipes.orderBy('position').toArray()
+  () => db.ingredients.orderBy('desc').toArray()
 ).subscribe(result => {
-  recipes.value = result
+  ingredients.value = result
 })
 
 onUnmounted(() => subscription.unsubscribe())
@@ -25,15 +25,16 @@ onUnmounted(() => subscription.unsubscribe())
 async function startAdding() {
   adding.value = true
   newDesc.value = ''
+  newUnit.value = ''
   await nextTick()
   inputRef.value?.focus()
 }
 
 async function confirmAdd() {
   if (newDesc.value.trim()) {
-    await db.recipes.add({
+    await db.ingredients.add({
       desc: newDesc.value.trim(),
-      position: recipes.value.length + 1
+      measure_unit: newUnit.value ?? ''
     })
   }
   adding.value = false
@@ -43,10 +44,14 @@ function cancelAdd() {
   adding.value = false
 }
 
-async function onDragEnd() {
-  await db.recipes.bulkPut(
-    recipes.value.map((r, i) => ({ ...r, position: i + 1 }))
-  )
+const formRef = ref(null)
+
+function onFocusOut() {
+  setTimeout(() => {
+    if (!formRef.value?.contains(document.activeElement)) {
+      cancelAdd()
+    }
+  }, 150)
 }
 </script>
 
@@ -65,28 +70,38 @@ async function onDragEnd() {
 
     <v-btn icon="mdi-plus" variant="text" @click="startAdding" />
 
-    <v-card v-if="adding" class="mb-2 pa-2">
+    <v-card v-if="adding" ref="formRef" class="mb-2 pa-2" @focusout="onFocusOut">
       <v-text-field
         ref="inputRef"
         v-model="newDesc"
-        placeholder="Recipe name"
+        placeholder="Ingredient name"
         variant="underlined"
         density="compact"
         autofocus
         hide-details
+        class="mb-1"
         @keyup.enter="confirmAdd"
         @keyup.esc="cancelAdd"
       />
+      <div class="d-flex align-center ga-2">
+        <v-select
+          v-model="newUnit"
+          :items="['cup', 'ml', 'g']"
+          placeholder="Unit (optional)"
+          variant="underlined"
+          density="compact"
+          hide-details
+          clearable
+          class="flex-grow-1"
+        />
+        <v-btn icon="mdi-check" variant="text" size="small" color="primary" @click="confirmAdd" />
+      </div>
     </v-card>
 
-    <draggable
-      v-model="filtered"
-      item-key="id"
-      @end="onDragEnd"
-    >
-      <template #item="{ element }">
-        <RecipeCard :recipe="element" />
-      </template>
-    </draggable>
+    <IngredientCard
+      v-for="ingredient in filtered"
+      :key="ingredient.id"
+      :ingredient="ingredient"
+    />
   </div>
 </template>
