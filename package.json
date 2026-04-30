@@ -1,5 +1,5 @@
 {
-  "name": "twominutesfinance",
+  "name": "twominutesgroceries",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -11,6 +11,7 @@
     "type-check": "vue-tsc --build"
   },
   "dependencies": {
+    "@mdi/font": "^7.4.47",
     "vue": "^3.5.32",
     "vue-router": "^5.0.4"
   },

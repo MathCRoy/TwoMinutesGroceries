@@ -1,7 +1,16 @@
-<script setup lang="ts"></script>
-
 <template>
-  <h1>TwoMinutesGroceries</h1>
+  <v-app>
+    <v-main>
+      <v-container max-width="480px">
+        <router-view />
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
 
 <style scoped></style>
+
+<script setup lang="ts">
+import { seedIfEmpty } from './db'
+seedIfEmpty()
+</script>
