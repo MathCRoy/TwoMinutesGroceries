@@ -10,13 +10,23 @@ const router = useRouter()
 const ingredients = ref([])
 const search = ref('')
 const basicOnly = ref(false)
-const filtered = computed(() =>
-  ingredients.value.filter(i =>
+const orderBySection = ref(false)
+const SECTIONS = ['Vegie', 'Meat', 'Frozen', 'Dairy', 'Pantry']
+
+const filtered = computed(() => {
+  const result = ingredients.value.filter(i =>
     i.desc.toLowerCase().includes(search.value.toLowerCase()) &&
     (!basicOnly.value || i.is_basic)
   )
-)
-const SECTIONS = ['Vegie', 'Meat', 'Frozen', 'Dairy', 'Dry']
+  if (!orderBySection.value) return result
+  return [...result].sort((a, b) => {
+    const ai = SECTIONS.indexOf(a.section ?? '')
+    const bi = SECTIONS.indexOf(b.section ?? '')
+    const sectionDiff = (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi)
+    if (sectionDiff !== 0) return sectionDiff
+    return a.desc.localeCompare(b.desc)
+  })
+})
 
 const adding = ref(false)
 const newDesc = ref('')
@@ -92,6 +102,8 @@ function onFocusOut() {
 
     <div class="d-flex align-center">
       <v-checkbox v-model="basicOnly" label="Basic only" density="compact" hide-details class="mr-2" />
+      <v-checkbox v-model="orderBySection" label="By type" density="compact" hide-details class="mr-2" />
+      <v-spacer />
       <v-btn icon="mdi-plus" variant="text" @click="startAdding" />
     </div>
 

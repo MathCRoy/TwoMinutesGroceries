@@ -5,7 +5,7 @@ import { useRouter } from 'vue-router'
 import { db } from '../db'
 import { selectedRecipeIds, selectedIngredientIds } from '../state/groceriesList'
 
-const SECTIONS = ['Vegie', 'Meat', 'Frozen', 'Dairy', 'Dry']
+const SECTIONS = ['Vegie', 'Meat', 'Frozen', 'Dairy', 'Pantry']
 
 const router = useRouter()
 

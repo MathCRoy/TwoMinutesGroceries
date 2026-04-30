@@ -2,7 +2,15 @@
 import { ref, nextTick } from 'vue'
 import { db } from '../db'
 
-const SECTIONS = ['Vegie', 'Meat', 'Frozen', 'Dairy', 'Dry']
+const SECTIONS = ['Vegie', 'Meat', 'Frozen', 'Dairy', 'Pantry']
+
+const SECTION_CONFIG: Record<string, { abbr: string; color: string }> = {
+  Vegie:  { abbr: 'v', color: 'green' },
+  Meat:   { abbr: 'M', color: 'red' },
+  Frozen: { abbr: 'F', color: 'light-blue-lighten-2' },
+  Dairy:  { abbr: 'D', color: 'amber-lighten-2' },
+  Pantry: { abbr: 'P', color: 'brown-lighten-2' },
+}
 
 const props = defineProps<{ ingredient: { id: number, desc: string, measure_unit: string, is_basic: boolean, section?: string } }>()
 
@@ -53,7 +61,7 @@ function onFocusOut() {
 </script>
 
 <template>
-  <v-card class="mb-2 pa-3 d-flex align-center">
+  <v-card class="mb-2 pa-3 d-flex align-center" :style="!editing ? 'cursor: pointer' : ''" @click="!editing && startEdit()">
     <div class="flex-grow-1">
       <div v-if="editing" ref="wrapperRef" @focusout="onFocusOut">
         <div class="d-flex align-center ga-2 mb-1">
@@ -99,12 +107,11 @@ function onFocusOut() {
       </div>
       <template v-else>
         <span>{{ ingredient.desc }}</span>
-        <span v-if="ingredient.measure_unit" class="text-caption text-grey ml-2">({{ ingredient.measure_unit }})</span>
-        <v-chip v-if="ingredient.section" size="x-small" color="secondary" variant="tonal" class="ml-2">{{ ingredient.section }}</v-chip>
         <v-chip v-if="ingredient.is_basic" size="x-small" color="primary" variant="tonal" class="ml-2">B</v-chip>
+        <v-chip v-if="ingredient.section && SECTION_CONFIG[ingredient.section]" size="x-small" :color="SECTION_CONFIG[ingredient.section].color" variant="tonal" class="ml-2">{{ SECTION_CONFIG[ingredient.section].abbr }}</v-chip>
       </template>
     </div>
 
-    <v-btn v-if="!editing" icon="mdi-pencil" variant="text" size="small" color="grey" @click="startEdit" />
+    <span v-if="!editing && ingredient.measure_unit" class="text-caption text-grey">{{ ingredient.measure_unit }}</span>
   </v-card>
 </template>
