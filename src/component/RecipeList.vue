@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, nextTick, onUnmounted } from 'vue'
 import { liveQuery } from 'dexie'
+import draggable from 'vuedraggable'
 import { db } from '../db'
 import RecipeCard from './RecipeCard.vue'
 
@@ -37,6 +38,12 @@ async function confirmAdd() {
 function cancelAdd() {
   adding.value = false
 }
+
+async function onDragEnd() {
+  await db.recipes.bulkPut(
+    recipes.value.map((r, i) => ({ ...r, position: i + 1 }))
+  )
+}
 </script>
 
 <template>
@@ -57,10 +64,14 @@ function cancelAdd() {
       />
     </v-card>
 
-    <RecipeCard
-      v-for="recipe in recipes"
-      :key="recipe.id"
-      :recipe="recipe"
-    />
+    <draggable
+      v-model="recipes"
+      item-key="id"
+      @end="onDragEnd"
+    >
+      <template #item="{ element }">
+        <RecipeCard :recipe="element" />
+      </template>
+    </draggable>
   </div>
 </template>
