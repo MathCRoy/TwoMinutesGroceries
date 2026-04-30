@@ -97,7 +97,7 @@ function t(key: keyof typeof messages.en): string {
 }
 
 function tSection(key: string): string {
-  return sectionLabels[locale.value][key] ?? key
+  return sectionLabels[locale.value]?.[key] ?? key
 }
 
 export function useLocale() {

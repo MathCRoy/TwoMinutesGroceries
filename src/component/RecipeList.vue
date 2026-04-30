@@ -3,21 +3,21 @@ import { ref, nextTick, onUnmounted, computed } from 'vue'
 import { liveQuery } from 'dexie'
 import draggable from 'vuedraggable'
 import { useRouter } from 'vue-router'
-import { db } from '../db'
+import { db, type Recipe } from '../db'
 import RecipeCard from './RecipeCard.vue'
 import { useLocale } from '../composables/useLocale'
 
 const router = useRouter()
 const { t } = useLocale()
 
-const recipes = ref([])
+const recipes = ref<Recipe[]>([])
 const search = ref('')
 const filtered = computed(() =>
   recipes.value.filter(r => r.desc.toLowerCase().includes(search.value.toLowerCase()))
 )
 const adding = ref(false)
 const newDesc = ref('')
-const inputRef = ref(null)
+const inputRef = ref<any>(null)
 
 const subscription = liveQuery(
   () => db.recipes.orderBy('position').toArray()

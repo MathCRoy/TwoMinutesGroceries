@@ -23,7 +23,7 @@ const editDesc = ref('')
 const editUnit = ref('')
 const editIsBasic = ref(false)
 const editSection = ref('')
-const inputRef = ref(null)
+const inputRef = ref<any>(null)
 
 async function startEdit() {
   editDesc.value = props.ingredient.desc
@@ -51,7 +51,7 @@ function cancelEdit() {
   editing.value = false
 }
 
-const wrapperRef = ref(null)
+const wrapperRef = ref<HTMLElement | null>(null)
 
 function onFocusOut() {
   setTimeout(() => {
@@ -112,7 +112,7 @@ function onFocusOut() {
       <template v-else>
         <span>{{ ingredient.desc }}</span>
         <v-chip v-if="ingredient.is_basic" size="x-small" color="primary" variant="tonal" class="ml-2">B</v-chip>
-        <v-chip v-if="ingredient.section && SECTION_CONFIG[ingredient.section]" size="x-small" :color="SECTION_CONFIG[ingredient.section].color" variant="tonal" class="ml-2">{{ SECTION_CONFIG[ingredient.section].abbr }}</v-chip>
+        <v-chip v-if="ingredient.section && SECTION_CONFIG[ingredient.section]" size="x-small" :color="SECTION_CONFIG[ingredient.section]?.color" variant="tonal" class="ml-2">{{ SECTION_CONFIG[ingredient.section]?.abbr }}</v-chip>
       </template>
     </div>
 

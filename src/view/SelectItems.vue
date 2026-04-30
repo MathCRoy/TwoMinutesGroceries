@@ -2,15 +2,15 @@
 import { ref, onUnmounted } from 'vue'
 import { liveQuery } from 'dexie'
 import { useRouter } from 'vue-router'
-import { db } from '../db'
+import { db, type Recipe, type Ingredient } from '../db'
 import { selectedRecipeIds, selectedIngredientIds } from '../state/groceriesList'
 import { useLocale } from '../composables/useLocale'
 
 const router = useRouter()
 const { t } = useLocale()
 
-const recipes = ref([])
-const basicIngredients = ref([])
+const recipes = ref<Recipe[]>([])
+const basicIngredients = ref<Ingredient[]>([])
 
 const recipeSub = liveQuery(
   () => db.recipes.orderBy('position').toArray()

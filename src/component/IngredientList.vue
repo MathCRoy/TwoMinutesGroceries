@@ -2,14 +2,14 @@
 import { ref, nextTick, onUnmounted, computed } from 'vue'
 import { liveQuery } from 'dexie'
 import { useRouter } from 'vue-router'
-import { db } from '../db'
+import { db, type Ingredient } from '../db'
 import IngredientCard from './IngredientCard.vue'
 import { useLocale } from '../composables/useLocale'
 
 const router = useRouter()
 const { t, tSection } = useLocale()
 
-const ingredients = ref([])
+const ingredients = ref<Ingredient[]>([])
 const search = ref('')
 const basicOnly = ref(false)
 const orderBySection = ref(false)
@@ -36,7 +36,7 @@ const newDesc = ref('')
 const newUnit = ref('')
 const newIsBasic = ref(false)
 const newSection = ref('')
-const inputRef = ref(null)
+const inputRef = ref<any>(null)
 
 const subscription = liveQuery(
   () => db.ingredients.orderBy('desc').toArray()
@@ -72,7 +72,7 @@ function cancelAdd() {
   adding.value = false
 }
 
-const formRef = ref(null)
+const formRef = ref<any>(null)
 
 function onFocusOut() {
   setTimeout(() => {
