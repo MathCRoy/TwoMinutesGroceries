@@ -34,6 +34,11 @@ function toggleIngredient(id: number) {
     ? selectedIngredientIds.value.filter(x => x !== id)
     : [...selectedIngredientIds.value, id]
 }
+
+function clearSelection() {
+  selectedRecipeIds.value = []
+  selectedIngredientIds.value = []
+}
 </script>
 
 <template>
@@ -41,6 +46,8 @@ function toggleIngredient(id: number) {
     <div class="d-flex align-center mb-4">
       <v-btn icon="mdi-arrow-left" variant="text" @click="router.back()" />
       <span class="text-h6 ml-2">Create Groceries List</span>
+      <v-spacer />
+      <v-btn variant="tonal" size="small" @click="clearSelection">Clear</v-btn>
     </div>
 
     <div class="text-subtitle-1 font-weight-bold mb-2">Basic Ingredients</div>

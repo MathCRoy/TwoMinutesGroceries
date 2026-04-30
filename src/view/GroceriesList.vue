@@ -99,6 +99,7 @@ function toggleIngredient(id: number) {
 function allChecked(items: { id: number }[]): boolean {
   return items.length > 0 && items.every(i => checkedIds.value.has(i.id))
 }
+
 </script>
 
 <template>
@@ -107,7 +108,7 @@ function allChecked(items: { id: number }[]): boolean {
       <v-btn icon="mdi-arrow-left" variant="text" @click="router.back()" />
       <span class="text-h6 ml-2">Groceries List</span>
       <v-spacer />
-      <v-btn icon="mdi-plus" variant="text" @click="router.push('/groceries-list/select')" />
+      <v-btn variant="tonal" size="small" @click="router.push('/groceries-list/select')">Select</v-btn>
     </div>
 
     <div class="mb-6">
