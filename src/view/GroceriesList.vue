@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { ref, onUnmounted, computed } from 'vue'
+import { ref, onUnmounted, computed, watch } from 'vue'
 import { liveQuery } from 'dexie'
 import { useRouter } from 'vue-router'
 import { db } from '../db'
-import { selectedRecipeIds, selectedIngredients as selectedBasicIngredients } from '../state/groceriesList'
+import { selectedRecipeIds, selectedIngredientIds } from '../state/groceriesList'
+
+const SECTIONS = ['Vegie', 'Meat', 'Frozen', 'Dairy', 'Dry']
 
 const router = useRouter()
 
@@ -41,12 +43,11 @@ function sumQuantities(...quantities: string[]): string {
 }
 
 const selectedIngredients = computed(() => {
-  const basicIds = selectedBasicIngredients.value.map(i => i.id)
   const recipeIngredientIds = recipeIngredientMappings.value
     .filter(m => selectedRecipeIds.value.includes(m.recipe_id))
     .map(m => m.ingredient_id)
 
-  const allIds = [...new Set([...basicIds, ...recipeIngredientIds])]
+  const allIds = [...new Set([...selectedIngredientIds.value, ...recipeIngredientIds])]
 
   return allIngredients.value
     .filter(i => allIds.includes(i.id))
@@ -54,15 +55,36 @@ const selectedIngredients = computed(() => {
       const recipeMappings = recipeIngredientMappings.value.filter(
         m => selectedRecipeIds.value.includes(m.recipe_id) && m.ingredient_id === ingredient.id
       )
-      const basicEntry = selectedBasicIngredients.value.find(i => i.id === ingredient.id)
+      const isBasic = selectedIngredientIds.value.includes(ingredient.id)
 
       const totalQty = sumQuantities(
-        ...(basicEntry ? [basicEntry.quantity] : []),
+        ...(isBasic ? ['1'] : []),
         ...recipeMappings.map(m => m.quantity ?? '')
       )
 
       return { ...ingredient, totalQty }
     })
+})
+
+const sortByType = ref(false)
+
+const ingredientsBySection = computed(() => {
+  const groups: { label: string; items: typeof selectedIngredients.value }[] = []
+  const sectionOrder = [...SECTIONS, '']
+
+  for (const section of sectionOrder) {
+    const items = selectedIngredients.value.filter(i => (i.section ?? '') === section)
+    if (items.length > 0) {
+      groups.push({ label: section || 'Other', items })
+    }
+  }
+  return groups
+})
+
+const openPanels = ref<number[]>([])
+
+watch(sortByType, (on) => {
+  if (on) openPanels.value = ingredientsBySection.value.map((_, i) => i)
 })
 </script>
 
@@ -90,20 +112,75 @@ const selectedIngredients = computed(() => {
     </div>
 
     <div>
-      <div class="text-subtitle-1 font-weight-bold mb-2">Ingredients</div>
+      <div class="d-flex align-center mb-2">
+        <span class="text-subtitle-1 font-weight-bold">Ingredients</span>
+        <v-spacer />
+        <v-checkbox
+          v-model="sortByType"
+          label="By type"
+          density="compact"
+          hide-details
+        />
+      </div>
+
       <v-card v-if="selectedIngredients.length === 0" class="pa-3 text-medium-emphasis">
         No ingredients selected.
       </v-card>
-      <v-card
-        v-for="ingredient in selectedIngredients"
-        :key="ingredient.id"
-        class="mb-2 pa-3 d-flex align-center"
-      >
-        <span class="flex-grow-1">{{ ingredient.desc }}</span>
-        <span v-if="ingredient.totalQty || ingredient.measure_unit" class="text-body-2 text-grey">
-          {{ ingredient.totalQty }}<span v-if="ingredient.measure_unit"> {{ ingredient.measure_unit }}</span>
-        </span>
-      </v-card>
+
+      <template v-else-if="!sortByType">
+        <v-card
+          v-for="ingredient in selectedIngredients"
+          :key="ingredient.id"
+          class="mb-2 pa-3 d-flex align-center"
+        >
+          <span class="flex-grow-1">{{ ingredient.desc }}</span>
+          <span v-if="ingredient.totalQty || ingredient.measure_unit" class="text-body-2 text-grey">
+            {{ [ingredient.totalQty, ingredient.measure_unit].filter(Boolean).join(' ') }}
+          </span>
+        </v-card>
+      </template>
+
+      <v-expansion-panels v-else v-model="openPanels" multiple variant="accordion" elevation="0">
+        <v-expansion-panel
+          v-for="(group, idx) in ingredientsBySection"
+          :key="group.label"
+          :value="idx"
+          bg-color="transparent"
+          class="mb-3"
+        >
+          <v-expansion-panel-title>
+            <span class="font-weight-medium">{{ group.label }}</span>
+            <span class="text-caption text-grey ml-2">({{ group.items.length }})</span>
+          </v-expansion-panel-title>
+          <v-expansion-panel-text>
+            <v-card
+              v-for="ingredient in group.items"
+              :key="ingredient.id"
+              class="mb-2 pa-3 d-flex align-center"
+            >
+              <span class="flex-grow-1">{{ ingredient.desc }}</span>
+              <span v-if="ingredient.totalQty || ingredient.measure_unit" class="text-body-2 text-grey">
+                {{ [ingredient.totalQty, ingredient.measure_unit].filter(Boolean).join(' ') }}
+              </span>
+            </v-card>
+          </v-expansion-panel-text>
+        </v-expansion-panel>
+      </v-expansion-panels>
     </div>
   </div>
 </template>
+
+<style scoped>
+:deep(.v-expansion-panel::after),
+:deep(.v-expansion-panel--active + .v-expansion-panel::before),
+:deep(.v-expansion-panel::before) {
+  box-shadow: none;
+  border: none;
+}
+:deep(.v-expansion-panel-title) {
+  background-color: rgb(var(--v-theme-surface));
+}
+:deep(.v-expansion-panel-text__wrapper) {
+  padding: 8px 0 8px 16px;
+}
+</style>
