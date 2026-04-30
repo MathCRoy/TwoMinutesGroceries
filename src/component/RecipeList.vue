@@ -5,8 +5,10 @@ import draggable from 'vuedraggable'
 import { useRouter } from 'vue-router'
 import { db } from '../db'
 import RecipeCard from './RecipeCard.vue'
+import { useLocale } from '../composables/useLocale'
 
 const router = useRouter()
+const { t } = useLocale()
 
 const recipes = ref([])
 const search = ref('')
@@ -57,12 +59,14 @@ async function onDragEnd() {
   <div>
     <div class="d-flex align-center mb-4">
       <v-btn icon="mdi-arrow-left" variant="text" @click="router.back()" />
-      <span class="text-h6 ml-2">Recipes</span>
+      <span class="text-h6 ml-2">{{ t('recipes') }}</span>
+      <v-spacer />
+      <v-btn icon="mdi-plus" variant="text" @click="startAdding" />
     </div>
 
     <v-text-field
       v-model="search"
-      placeholder="Search"
+      :placeholder="t('search')"
       prepend-inner-icon="mdi-magnify"
       variant="outlined"
       density="compact"
@@ -71,13 +75,11 @@ async function onDragEnd() {
       class="mb-3"
     />
 
-    <v-btn icon="mdi-plus" variant="text" @click="startAdding" />
-
     <v-card v-if="adding" class="mb-2 pa-2">
       <v-text-field
         ref="inputRef"
         v-model="newDesc"
-        placeholder="Recipe name"
+        :placeholder="t('recipe_name')"
         variant="underlined"
         density="compact"
         autofocus
@@ -90,6 +92,7 @@ async function onDragEnd() {
     <draggable
       v-model="filtered"
       item-key="id"
+      :options="{ delay: 200, delayOnTouchOnly: true }"
       @end="onDragEnd"
     >
       <template #item="{ element }">

@@ -4,10 +4,12 @@ import { liveQuery } from 'dexie'
 import { useRouter } from 'vue-router'
 import { db } from '../db'
 import { selectedRecipeIds, selectedIngredientIds } from '../state/groceriesList'
+import { useLocale } from '../composables/useLocale'
 
 const SECTIONS = ['Vegie', 'Meat', 'Frozen', 'Dairy', 'Pantry']
 
 const router = useRouter()
+const { t, tSection } = useLocale()
 
 const allRecipes = ref([])
 const allIngredients = ref([])
@@ -75,7 +77,7 @@ const ingredientsBySection = computed(() => {
   for (const section of sectionOrder) {
     const items = selectedIngredients.value.filter(i => (i.section ?? '') === section)
     if (items.length > 0) {
-      groups.push({ label: section || 'Other', items })
+      groups.push({ label: section ? tSection(section) : t('other'), items })
     }
   }
   return groups
@@ -106,15 +108,15 @@ function allChecked(items: { id: number }[]): boolean {
   <div>
     <div class="d-flex align-center mb-4">
       <v-btn icon="mdi-arrow-left" variant="text" @click="router.back()" />
-      <span class="text-h6 ml-2">Groceries List</span>
+      <span class="text-h6 ml-2">{{ t('groceries_list') }}</span>
       <v-spacer />
-      <v-btn variant="tonal" size="small" @click="router.push('/groceries-list/select')">Select</v-btn>
+      <v-btn variant="tonal" size="small" @click="router.push('/groceries-list/select')">{{ t('select') }}</v-btn>
     </div>
 
     <div class="mb-6">
-      <div class="text-subtitle-1 font-weight-bold mb-2">Recipes</div>
+      <div class="text-subtitle-1 font-weight-bold mb-2">{{ t('recipes') }}</div>
       <v-card v-if="selectedRecipes.length === 0" class="pa-3 text-medium-emphasis">
-        No recipes selected.
+        {{ t('no_recipes_selected') }}
       </v-card>
       <v-card
         v-for="recipe in selectedRecipes"
@@ -127,18 +129,18 @@ function allChecked(items: { id: number }[]): boolean {
 
     <div>
       <div class="d-flex align-center mb-2">
-        <span class="text-subtitle-1 font-weight-bold">Ingredients</span>
+        <span class="text-subtitle-1 font-weight-bold">{{ t('ingredients') }}</span>
         <v-spacer />
         <v-checkbox
           v-model="sortByType"
-          label="By type"
+          :label="t('by_type')"
           density="compact"
           hide-details
         />
       </div>
 
       <v-card v-if="selectedIngredients.length === 0" class="pa-3 text-medium-emphasis">
-        No ingredients selected.
+        {{ t('no_ingredients_selected') }}
       </v-card>
 
       <template v-else-if="!sortByType">

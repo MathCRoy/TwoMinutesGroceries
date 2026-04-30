@@ -4,14 +4,17 @@ import { liveQuery } from 'dexie'
 import { useRouter } from 'vue-router'
 import { db } from '../db'
 import IngredientCard from './IngredientCard.vue'
+import { useLocale } from '../composables/useLocale'
 
 const router = useRouter()
+const { t, tSection } = useLocale()
 
 const ingredients = ref([])
 const search = ref('')
 const basicOnly = ref(false)
 const orderBySection = ref(false)
 const SECTIONS = ['Vegie', 'Meat', 'Frozen', 'Dairy', 'Pantry']
+const sectionItems = computed(() => ['', ...SECTIONS].map(s => ({ title: s ? tSection(s) : '', value: s })))
 
 const filtered = computed(() => {
   const result = ingredients.value.filter(i =>
@@ -86,12 +89,12 @@ function onFocusOut() {
   <div>
     <div class="d-flex align-center mb-4">
       <v-btn icon="mdi-arrow-left" variant="text" @click="router.back()" />
-      <span class="text-h6 ml-2">Ingredients</span>
+      <span class="text-h6 ml-2">{{ t('ingredients') }}</span>
     </div>
 
     <v-text-field
       v-model="search"
-      placeholder="Search"
+      :placeholder="t('search')"
       prepend-inner-icon="mdi-magnify"
       variant="outlined"
       density="compact"
@@ -101,8 +104,8 @@ function onFocusOut() {
     />
 
     <div class="d-flex align-center">
-      <v-checkbox v-model="basicOnly" label="Basic only" density="compact" hide-details class="mr-2" />
-      <v-checkbox v-model="orderBySection" label="By type" density="compact" hide-details class="mr-2" />
+      <v-checkbox v-model="basicOnly" :label="t('basic_only')" density="compact" hide-details class="mr-2" />
+      <v-checkbox v-model="orderBySection" :label="t('by_type')" density="compact" hide-details class="mr-2" />
       <v-spacer />
       <v-btn icon="mdi-plus" variant="text" @click="startAdding" />
     </div>
@@ -112,7 +115,7 @@ function onFocusOut() {
         <v-text-field
           ref="inputRef"
           v-model="newDesc"
-          placeholder="Ingredient name"
+          :placeholder="t('ingredient_name')"
           variant="underlined"
           density="compact"
           autofocus
@@ -123,7 +126,7 @@ function onFocusOut() {
         />
         <v-checkbox
           v-model="newIsBasic"
-          label="Basic"
+          :label="t('basic')"
           density="compact"
           hide-details
         />
@@ -133,20 +136,20 @@ function onFocusOut() {
         <v-select
           v-model="newUnit"
           :items="['', 'cup', 'ml', 'g']"
-          placeholder="Unit"
+          :label="newUnit ? '' : t('unit')"
           variant="underlined"
           density="compact"
           hide-details
-          class="flex-grow-1"
+          style="flex: 1 1 0; min-width: 0"
         />
         <v-select
           v-model="newSection"
-          :items="['', ...SECTIONS]"
-          placeholder="Section"
+          :items="sectionItems"
+          :label="newSection ? '' : t('section')"
           variant="underlined"
           density="compact"
           hide-details
-          class="flex-grow-1"
+          style="flex: 1 1 0; min-width: 0"
         />
       </div>
     </v-card>

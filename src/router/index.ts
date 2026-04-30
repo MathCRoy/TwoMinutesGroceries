@@ -5,6 +5,7 @@ import Ingredients from '../view/Ingredients.vue'
 import RecipeEdit from '../view/RecipeEdit.vue'
 import GroceriesList from '../view/GroceriesList.vue'
 import SelectItems from '../view/SelectItems.vue'
+import Config from '../view/Config.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,6 +16,7 @@ const router = createRouter({
     { path: '/ingredients', component: Ingredients },
     { path: '/groceries-list', component: GroceriesList },
     { path: '/groceries-list/select', component: SelectItems },
+    { path: '/config', component: Config },
   ],
 })
 

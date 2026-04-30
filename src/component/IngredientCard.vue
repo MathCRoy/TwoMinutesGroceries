@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref, nextTick } from 'vue'
+import { ref, nextTick, computed } from 'vue'
 import { db } from '../db'
+import { useLocale } from '../composables/useLocale'
 
 const SECTIONS = ['Vegie', 'Meat', 'Frozen', 'Dairy', 'Pantry']
 
@@ -13,6 +14,9 @@ const SECTION_CONFIG: Record<string, { abbr: string; color: string }> = {
 }
 
 const props = defineProps<{ ingredient: { id: number, desc: string, measure_unit: string, is_basic: boolean, section?: string } }>()
+
+const { t, tSection } = useLocale()
+const sectionItems = computed(() => ['', ...SECTIONS].map(s => ({ title: s ? tSection(s) : '', value: s })))
 
 const editing = ref(false)
 const editDesc = ref('')
@@ -62,23 +66,23 @@ function onFocusOut() {
 
 <template>
   <v-card class="mb-2 pa-3 d-flex align-center" :style="!editing ? 'cursor: pointer' : ''" @click="!editing && startEdit()">
-    <div class="flex-grow-1">
+    <div style="flex: 1 1 0; min-width: 0">
       <div v-if="editing" ref="wrapperRef" @focusout="onFocusOut">
         <div class="d-flex align-center ga-2 mb-1">
           <v-text-field
             ref="inputRef"
             v-model="editDesc"
-            placeholder="Ingredient name"
+            :placeholder="t('ingredient_name')"
             variant="underlined"
             density="compact"
             hide-details
-            class="flex-grow-1"
+            style="flex: 1 1 0; min-width: 0"
             @keyup.enter="confirmEdit"
             @keyup.esc="cancelEdit"
           />
           <v-checkbox
             v-model="editIsBasic"
-            label="Basic"
+            :label="t('basic')"
             density="compact"
             hide-details
           />
@@ -88,20 +92,20 @@ function onFocusOut() {
           <v-select
             v-model="editUnit"
             :items="['', 'cup', 'ml', 'g']"
-            placeholder="Unit"
+            :label="editUnit ? '' : t('unit')"
             variant="underlined"
             density="compact"
             hide-details
-            class="flex-grow-1"
+            style="flex: 1 1 0; min-width: 0"
           />
           <v-select
             v-model="editSection"
-            :items="['', ...SECTIONS]"
-            placeholder="Section"
+            :items="sectionItems"
+            :label="editSection ? '' : t('section')"
             variant="underlined"
             density="compact"
             hide-details
-            class="flex-grow-1"
+            style="flex: 1 1 0; min-width: 0"
           />
         </div>
       </div>

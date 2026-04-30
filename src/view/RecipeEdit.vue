@@ -4,9 +4,11 @@ import { useRoute, useRouter } from 'vue-router'
 import { liveQuery } from 'dexie'
 import { db } from '../db'
 import NewIngredientDialog from '../component/NewIngredientDialog.vue'
+import { useLocale } from '../composables/useLocale'
 
 const route = useRoute()
 const router = useRouter()
+const { t } = useLocale()
 const recipeId = Number(route.params.id)
 
 const recipe = ref<{ id: number; desc: string; position: number } | null>(null)
@@ -45,7 +47,6 @@ const availableIngredients = computed(() =>
   allIngredients.value.filter(i => !linkedIngredientIds.value.has(i.id))
 )
 
-// Name editing
 const nameEditing = ref(false)
 const editName = ref('')
 const nameInputRef = ref<HTMLElement | null>(null)
@@ -68,10 +69,12 @@ function cancelEditName() {
   nameEditing.value = false
 }
 
-// New ingredient dialog
 const newIngredientDialog = ref(false)
 
-// Ingredient management
+async function onIngredientCreated(id: number) {
+  await db.recipe_ingredient_mapper.add({ recipe_id: recipeId, ingredient_id: id, quantity: '' })
+}
+
 const selectedIngredientId = ref<number | null>(null)
 const newQuantity = ref('')
 
@@ -99,16 +102,15 @@ async function removeIngredient(mappingId: number) {
   <div>
     <div class="d-flex align-center mb-4">
       <v-btn icon="mdi-arrow-left" variant="text" @click="router.back()" />
-      <span class="text-h6 ml-2">Edit Recipe</span>
+      <span class="text-h6 ml-2">{{ t('edit_recipe') }}</span>
     </div>
 
-    <!-- Recipe name -->
     <v-card class="mb-6 pa-3">
       <v-text-field
         v-if="nameEditing"
         ref="nameInputRef"
         v-model="editName"
-        label="Recipe name"
+        :label="t('recipe_name')"
         variant="underlined"
         density="compact"
         hide-details
@@ -119,14 +121,13 @@ async function removeIngredient(mappingId: number) {
       <span v-else class="text-body-1 cursor-pointer" @click="startEditName">{{ recipe?.desc }}</span>
     </v-card>
 
-    <!-- Ingredients section -->
     <div class="d-flex align-center mb-2">
-      <span class="text-subtitle-1">Ingredients</span>
+      <span class="text-subtitle-1">{{ t('ingredients') }}</span>
       <v-spacer />
-      <v-btn size="small" variant="text" color="primary" @click="newIngredientDialog = true">New</v-btn>
+      <v-btn icon="mdi-plus" variant="text" size="small" @click="newIngredientDialog = true" />
     </div>
 
-    <NewIngredientDialog v-model="newIngredientDialog" />
+    <NewIngredientDialog v-model="newIngredientDialog" @created="onIngredientCreated" />
 
     <v-card
       v-for="ingredient in recipeIngredients"
@@ -139,7 +140,7 @@ async function removeIngredient(mappingId: number) {
       <v-text-field
         :model-value="ingredient.quantity"
         :suffix="ingredient.measure_unit"
-        placeholder="Qty"
+        :placeholder="t('qty')"
         variant="underlined"
         density="compact"
         hide-details
@@ -150,14 +151,13 @@ async function removeIngredient(mappingId: number) {
       <v-btn icon="mdi-close" variant="text" size="small" density="compact" color="grey" @click="removeIngredient(ingredient.mappingId)" />
     </v-card>
 
-    <!-- Add ingredient -->
     <div class="d-flex align-center ga-2 mt-3">
       <v-autocomplete
         v-model="selectedIngredientId"
         :items="availableIngredients"
         item-title="desc"
         item-value="id"
-        placeholder="Add"
+        :placeholder="t('add')"
         prepend-inner-icon="mdi-magnify"
         variant="outlined"
         density="compact"
@@ -168,7 +168,7 @@ async function removeIngredient(mappingId: number) {
       />
       <v-text-field
         v-model="newQuantity"
-        placeholder="Qty"
+        :placeholder="t('qty')"
         variant="outlined"
         density="compact"
         hide-details

@@ -6,11 +6,9 @@ const router = useRouter()
 </script>
 
 <template>
-  <v-card class="mb-2 pa-3 d-flex align-center">
+  <v-card class="mb-2 pa-3 d-flex align-center" style="cursor: pointer" @click="router.push(`/recipes/${recipe.id}/edit`)">
     <div class="flex-grow-1">
       <span>{{ recipe.desc }}</span>
     </div>
-    <v-btn icon="mdi-pencil" variant="text" size="small" color="grey" @click="router.push(`/recipes/${recipe.id}/edit`)" />
-    <v-btn icon="mdi-cart-plus" variant="text" size="small" />
   </v-card>
 </template>

@@ -4,8 +4,10 @@ import { liveQuery } from 'dexie'
 import { useRouter } from 'vue-router'
 import { db } from '../db'
 import { selectedRecipeIds, selectedIngredientIds } from '../state/groceriesList'
+import { useLocale } from '../composables/useLocale'
 
 const router = useRouter()
+const { t } = useLocale()
 
 const recipes = ref([])
 const basicIngredients = ref([])
@@ -45,14 +47,14 @@ function clearSelection() {
   <div>
     <div class="d-flex align-center mb-4">
       <v-btn icon="mdi-arrow-left" variant="text" @click="router.back()" />
-      <span class="text-h6 ml-2">Create Groceries List</span>
+      <span class="text-h6 ml-2">{{ t('create_groceries_list') }}</span>
       <v-spacer />
-      <v-btn variant="tonal" size="small" @click="clearSelection">Clear</v-btn>
+      <v-btn variant="tonal" size="small" @click="clearSelection">{{ t('clear') }}</v-btn>
     </div>
 
-    <div class="text-subtitle-1 font-weight-bold mb-2">Basic Ingredients</div>
+    <div class="text-subtitle-1 font-weight-bold mb-2">{{ t('basic_ingredients') }}</div>
     <v-card v-if="basicIngredients.length === 0" class="pa-3 text-medium-emphasis mb-2">
-      No basic ingredients defined yet.
+      {{ t('no_basic_ingredients') }}
     </v-card>
     <div v-else class="mb-6">
       <v-card
@@ -67,7 +69,7 @@ function clearSelection() {
       </v-card>
     </div>
 
-    <div class="text-subtitle-1 font-weight-bold mb-2">Recipes</div>
+    <div class="text-subtitle-1 font-weight-bold mb-2">{{ t('recipes') }}</div>
     <div>
       <v-card
         v-for="recipe in recipes"
