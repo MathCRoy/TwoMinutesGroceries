@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { db } from '../db'
 import { useLocale } from '../composables/useLocale'
+import PageHeader from '../component/PageHeader.vue'
 
 const router = useRouter()
 const { locale, t } = useLocale()
@@ -60,10 +61,7 @@ async function clearAll() {
 
 <template>
   <div class="d-flex flex-column ga-4 mt-4">
-    <div class="d-flex align-center ga-2">
-      <v-btn icon="mdi-arrow-left" variant="text" @click="router.push('/')" />
-      <span class="text-h6">{{ t('config') }}</span>
-    </div>
+    <PageHeader :title="t('config')" back="/" />
 
     <v-card color="transparent" flat>
       <v-card-title>{{ t('language') }}</v-card-title>

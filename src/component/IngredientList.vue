@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import { ref, nextTick, onUnmounted, computed } from 'vue'
 import { liveQuery } from 'dexie'
-import { useRouter } from 'vue-router'
 import { db, type Ingredient } from '../db'
 import IngredientCard from './IngredientCard.vue'
 import { useLocale } from '../composables/useLocale'
+import PageHeader from './PageHeader.vue'
 
-const router = useRouter()
 const { t, tSection } = useLocale()
 
 const ingredients = ref<Ingredient[]>([])
@@ -87,10 +86,7 @@ function onFocusOut() {
 
 <template>
   <div>
-    <div class="d-flex align-center mb-4">
-      <v-btn icon="mdi-arrow-left" variant="text" @click="router.back()" />
-      <span class="text-h6 ml-2">{{ t('ingredients') }}</span>
-    </div>
+    <PageHeader class="mb-4" :title="t('ingredients')" />
 
     <v-text-field
       v-model="search"

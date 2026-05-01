@@ -2,12 +2,11 @@
 import { ref, nextTick, onUnmounted, computed } from 'vue'
 import { liveQuery } from 'dexie'
 import draggable from 'vuedraggable'
-import { useRouter } from 'vue-router'
 import { db, type Recipe } from '../db'
 import RecipeCard from './RecipeCard.vue'
 import { useLocale } from '../composables/useLocale'
+import PageHeader from './PageHeader.vue'
 
-const router = useRouter()
 const { t } = useLocale()
 
 const recipes = ref<Recipe[]>([])
@@ -57,12 +56,9 @@ async function onDragEnd() {
 
 <template>
   <div>
-    <div class="d-flex align-center mb-4">
-      <v-btn icon="mdi-arrow-left" variant="text" @click="router.back()" />
-      <span class="text-h6 ml-2">{{ t('recipes') }}</span>
-      <v-spacer />
+    <PageHeader class="mb-4" :title="t('recipes')">
       <v-btn icon="mdi-plus" variant="text" @click="startAdding" />
-    </div>
+    </PageHeader>
 
     <v-text-field
       v-model="search"

@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { ref, computed, onUnmounted, nextTick } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 import { liveQuery } from 'dexie'
 import { db } from '../db'
 import NewIngredientDialog from '../component/NewIngredientDialog.vue'
 import { useLocale } from '../composables/useLocale'
+import PageHeader from '../component/PageHeader.vue'
 
 const route = useRoute()
-const router = useRouter()
 const { t } = useLocale()
 const recipeId = Number(route.params.id)
 
@@ -100,10 +100,7 @@ async function removeIngredient(mappingId: number) {
 
 <template>
   <div>
-    <div class="d-flex align-center mb-4">
-      <v-btn icon="mdi-arrow-left" variant="text" @click="router.back()" />
-      <span class="text-h6 ml-2">{{ t('edit_recipe') }}</span>
-    </div>
+    <PageHeader class="mb-4" :title="t('edit_recipe')" />
 
     <v-card class="mb-6 pa-3">
       <v-text-field

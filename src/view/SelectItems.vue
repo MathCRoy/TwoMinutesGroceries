@@ -1,16 +1,25 @@
 <script setup lang="ts">
-import { ref, onUnmounted } from 'vue'
+import { ref, computed, onUnmounted } from 'vue'
 import { liveQuery } from 'dexie'
-import { useRouter } from 'vue-router'
 import { db, type Recipe, type Ingredient } from '../db'
 import { selectedRecipeIds, selectedIngredientIds } from '../state/groceriesList'
 import { useLocale } from '../composables/useLocale'
+import PageHeader from '../component/PageHeader.vue'
 
-const router = useRouter()
 const { t } = useLocale()
+
+const search = ref('')
 
 const recipes = ref<Recipe[]>([])
 const basicIngredients = ref<Ingredient[]>([])
+
+const filteredRecipes = computed(() =>
+  recipes.value.filter(r => r.desc.toLowerCase().includes(search.value.toLowerCase()))
+)
+
+const filteredIngredients = computed(() =>
+  basicIngredients.value.filter(i => i.desc.toLowerCase().includes(search.value.toLowerCase()))
+)
 
 const recipeSub = liveQuery(
   () => db.recipes.orderBy('position').toArray()
@@ -45,20 +54,28 @@ function clearSelection() {
 
 <template>
   <div>
-    <div class="d-flex align-center mb-4">
-      <v-btn icon="mdi-arrow-left" variant="text" @click="router.back()" />
-      <span class="text-h6 ml-2">{{ t('create_groceries_list') }}</span>
-      <v-spacer />
+    <PageHeader class="mb-2" :title="t('create_groceries_list')">
       <v-btn variant="tonal" size="small" @click="clearSelection">{{ t('clear') }}</v-btn>
-    </div>
+    </PageHeader>
+
+    <v-text-field
+      v-model="search"
+      :placeholder="t('search')"
+      prepend-inner-icon="mdi-magnify"
+      variant="outlined"
+      density="compact"
+      clearable
+      hide-details
+      class="mb-4"
+    />
 
     <div class="text-subtitle-1 font-weight-bold mb-2">{{ t('basic_ingredients') }}</div>
-    <v-card v-if="basicIngredients.length === 0" class="pa-3 text-medium-emphasis mb-2">
+    <v-card v-if="filteredIngredients.length === 0" class="pa-3 text-medium-emphasis mb-2">
       {{ t('no_basic_ingredients') }}
     </v-card>
     <div v-else class="mb-6">
       <v-card
-        v-for="ingredient in basicIngredients"
+        v-for="ingredient in filteredIngredients"
         :key="ingredient.id"
         class="mb-2 pa-3"
         :color="selectedIngredientIds.includes(ingredient.id) ? 'indigo-darken-3' : undefined"
@@ -72,7 +89,7 @@ function clearSelection() {
     <div class="text-subtitle-1 font-weight-bold mb-2">{{ t('recipes') }}</div>
     <div>
       <v-card
-        v-for="recipe in recipes"
+        v-for="recipe in filteredRecipes"
         :key="recipe.id"
         class="mb-2 pa-3"
         :color="selectedRecipeIds.includes(recipe.id) ? 'indigo-darken-3' : undefined"

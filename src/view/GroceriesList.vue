@@ -5,6 +5,7 @@ import { useRouter } from 'vue-router'
 import { db, type Recipe, type Ingredient, type RecipeIngredientMapper } from '../db'
 import { selectedRecipeIds, selectedIngredientIds } from '../state/groceriesList'
 import { useLocale } from '../composables/useLocale'
+import PageHeader from '../component/PageHeader.vue'
 
 const SECTIONS = ['Vegie', 'Meat', 'Frozen', 'Dairy', 'Pantry']
 
@@ -106,12 +107,9 @@ function allChecked(items: { id: number }[]): boolean {
 
 <template>
   <div>
-    <div class="d-flex align-center mb-4">
-      <v-btn icon="mdi-arrow-left" variant="text" @click="router.back()" />
-      <span class="text-h6 ml-2">{{ t('groceries_list') }}</span>
-      <v-spacer />
+    <PageHeader class="mb-4" :title="t('groceries_list')">
       <v-btn variant="tonal" size="small" @click="router.push('/groceries-list/select')">{{ t('select') }}</v-btn>
-    </div>
+    </PageHeader>
 
     <div class="mb-6">
       <div class="text-subtitle-1 font-weight-bold mb-2">{{ t('recipes') }}</div>
