@@ -54,20 +54,22 @@ function clearSelection() {
 
 <template>
   <div>
-    <PageHeader class="mb-2" :title="t('create_groceries_list')">
-      <v-btn variant="tonal" size="small" @click="clearSelection">{{ t('clear') }}</v-btn>
-    </PageHeader>
+    <div class="sticky-top">
+      <PageHeader class="mb-2" :title="t('create_groceries_list')">
+        <v-btn variant="tonal" size="small" @click="clearSelection">{{ t('clear') }}</v-btn>
+      </PageHeader>
 
-    <v-text-field
-      v-model="search"
-      :placeholder="t('search')"
-      prepend-inner-icon="mdi-magnify"
-      variant="outlined"
-      density="compact"
-      clearable
-      hide-details
-      class="mb-4"
-    />
+      <v-text-field
+        v-model="search"
+        :placeholder="t('search')"
+        prepend-inner-icon="mdi-magnify"
+        variant="outlined"
+        density="compact"
+        clearable
+        hide-details
+        class="mb-4"
+      />
+    </div>
 
     <div class="text-subtitle-1 font-weight-bold mb-2">{{ t('basic_ingredients') }}</div>
     <v-card v-if="filteredIngredients.length === 0" class="pa-3 text-medium-emphasis mb-2">
@@ -100,3 +102,16 @@ function clearSelection() {
     </div>
   </div>
 </template>
+
+<style scoped>
+.sticky-top {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgb(var(--v-theme-background));
+}
+
+.sticky-top :deep(.page-header) {
+  position: static;
+}
+</style>

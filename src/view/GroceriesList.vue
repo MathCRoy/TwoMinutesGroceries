@@ -69,14 +69,20 @@ const selectedIngredients = computed(() => {
     })
 })
 
-const sortByType = ref(false)
+const sortByType = ref(true)
+
+function checkedLast(a: { id: number }, b: { id: number }): number {
+  return (checkedIds.value.has(a.id) ? 1 : 0) - (checkedIds.value.has(b.id) ? 1 : 0)
+}
 
 const ingredientsBySection = computed(() => {
   const groups: { label: string; items: typeof selectedIngredients.value }[] = []
   const sectionOrder = [...SECTIONS, '']
 
   for (const section of sectionOrder) {
-    const items = selectedIngredients.value.filter(i => (i.section ?? '') === section)
+    const items = selectedIngredients.value
+      .filter(i => (i.section ?? '') === section)
+      .sort(checkedLast)
     if (items.length > 0) {
       groups.push({ label: section ? tSection(section) : t('other'), items })
     }
@@ -84,11 +90,15 @@ const ingredientsBySection = computed(() => {
   return groups
 })
 
+const sortedIngredients = computed(() =>
+  [...selectedIngredients.value].sort(checkedLast)
+)
+
 const openPanels = ref<number[]>([])
 
-watch(sortByType, (on) => {
-  if (on) openPanels.value = ingredientsBySection.value.map((_, i) => i)
-})
+watch([sortByType, ingredientsBySection], ([on, sections]) => {
+  if (on) openPanels.value = (sections as typeof ingredientsBySection.value).map((_, i) => i)
+}, { immediate: true })
 
 const checkedIds = ref<Set<number>>(new Set())
 
@@ -143,7 +153,7 @@ function allChecked(items: { id: number }[]): boolean {
 
       <template v-else-if="!sortByType">
         <v-card
-          v-for="ingredient in selectedIngredients"
+          v-for="ingredient in sortedIngredients"
           :key="ingredient.id"
           class="mb-2 pa-3 d-flex align-center ingredient-card"
           :class="{ 'ingredient-checked': checkedIds.has(ingredient.id) }"
