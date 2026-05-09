@@ -3,7 +3,7 @@ import { ref, onUnmounted, computed, watch } from 'vue'
 import { liveQuery } from 'dexie'
 import { useRouter } from 'vue-router'
 import { db, type Recipe, type Ingredient, type RecipeIngredientMapper } from '../db'
-import { selectedRecipeIds, selectedIngredientIds } from '../state/groceriesList'
+import { selectedRecipeIds, selectedIngredientIds, checkedIngredientIds } from '../state/groceriesList'
 import { useLocale } from '../composables/useLocale'
 import PageHeader from '../component/PageHeader.vue'
 
@@ -100,7 +100,7 @@ watch([sortByType, ingredientsBySection], ([on, sections]) => {
   if (on) openPanels.value = (sections as typeof ingredientsBySection.value).map((_, i) => i)
 }, { immediate: true })
 
-const checkedIds = ref<Set<number>>(new Set())
+const checkedIds = checkedIngredientIds
 
 function toggleIngredient(id: number) {
   const next = new Set(checkedIds.value)
