@@ -52,7 +52,7 @@ const selectedIngredients = computed(() => {
 
   const allIds = [...new Set([...selectedIngredientIds.value, ...recipeIngredientIds])]
 
-  return allIngredients.value
+return allIngredients.value
     .filter(i => allIds.includes(i.id))
     .map(ingredient => {
       const recipeMappings = recipeIngredientMappings.value.filter(
@@ -60,10 +60,8 @@ const selectedIngredients = computed(() => {
       )
       const isBasic = selectedIngredientIds.value.includes(ingredient.id)
 
-      const totalQty = sumQuantities(
-        ...(isBasic ? ['1'] : []),
-        ...recipeMappings.map(m => m.quantity ?? '')
-      )
+      const quantities = [...(isBasic ? ['1'] : []), ...recipeMappings.map(m => m.quantity?.trim() || '1')]
+      const totalQty = sumQuantities(...quantities)
 
       return { ...ingredient, totalQty }
     })
