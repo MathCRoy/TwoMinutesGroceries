@@ -88,7 +88,8 @@ async function onDragEnd() {
     <draggable
       v-model="filtered"
       item-key="id"
-      :options="{ delay: 200, delayOnTouchOnly: true }"
+      :delay="200"
+      :delay-on-touch-only="true"
       @end="onDragEnd"
     >
       <template #item="{ element }">
