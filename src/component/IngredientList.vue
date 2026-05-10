@@ -76,7 +76,7 @@ const formRef = ref<any>(null)
 function onFocusOut() {
   setTimeout(() => {
     const overlay = document.querySelector('.v-overlay-container')
-    if (!formRef.value?.contains(document.activeElement) &&
+    if (!formRef.value?.$el?.contains(document.activeElement) &&
         !overlay?.contains(document.activeElement)) {
       cancelAdd()
     }
